@@ -1,0 +1,81 @@
+#root {
+  margin: 0 auto;
+}
+
+.app {
+  display: flex;
+}
+
+.movies-container {
+  width: 70vw;
+  background-color: blanchedalmond;
+}
+
+.movie-card {
+  display:inline-block;
+  width: 10vw;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+  filter: drop-shadow(0 0 .2em #d0d1e4aa);
+
+  &:hover {
+	filter: drop-shadow(0 0 1em #000000aa);
+  }
+
+  img {
+	width: 100%;
+	border-radius: 5px;
+  }
+}
+
+.movie-preview {
+	position: sticky;
+	display: grid;
+	place-items: center;
+  background-color: beige;
+  width: 30vw;
+  height: 100vh;
+  top: 0;
+}
+
+.movie-preview-container {
+	text-align: center;
+  top: 25vh;
+
+	.thumbnail {
+		img {
+			width: 15vw;
+		}
+	}
+  
+	.title {
+		font-size: 25px;
+    font-family: fantasy;
+    padding-bottom: 20px;
+		color: #4da9a1;
+	}
+
+	.metadata {
+		font-weight: bold;
+    font-size: 15px;
+		line-height: 20px;
+		color: #323230;
+	}
+
+	.plot {
+		overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+		font-size: 15px;
+    font-family: monospace;
+		line-height: 20px;
+	}
+
+}
+
+.movie-preview-container > * {
+  margin: 10px;
+}
