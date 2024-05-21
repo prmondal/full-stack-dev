@@ -12,6 +12,7 @@
 }
 
 .movie-card {
+  user-select: none;
   display:inline-block;
   width: 10vw;
   padding: 1.5em;
@@ -20,12 +21,25 @@
   filter: drop-shadow(0 0 .2em #d0d1e4aa);
 
   &:hover {
-	filter: drop-shadow(0 0 1em #000000aa);
+	  filter: drop-shadow(0 0 1em #000000aa);
   }
 
-  img {
-	width: 100%;
-	border-radius: 5px;
+  .thumbnail {
+    position: relative;
+
+    img {
+      width: 100%;
+      border-radius: 5px;
+    }
+  }
+
+  .wishlist-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transform: scale(2.0);
+    cursor: pointer;
+    user-select: none;
   }
 }
 
@@ -44,7 +58,7 @@
   top: 25vh;
 
 	.thumbnail {
-		img {
+    img {
 			width: 15vw;
 		}
 	}
