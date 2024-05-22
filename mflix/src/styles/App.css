@@ -37,9 +37,9 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    transform: scale(2.0);
     cursor: pointer;
     user-select: none;
+    color: rgb(65, 160, 36);
   }
 }
 
