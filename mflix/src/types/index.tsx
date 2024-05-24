@@ -3,10 +3,23 @@ export interface MovieInfoType {
     title: string;
     thumbnail?: string;
     fullPlot?: string;
-    year: Number;
-    runtime: Number;
+    year: number;
+    runtime: number;
     imdb: {
-        rating: Number
+        rating: number
+    },
+    languages?: string[]
+};
+
+export interface MovieInfoResponseType {
+    _id: string;
+    title: string;
+    poster?: string;
+    fullplot?: string;
+    year: number;
+    runtime: number;
+    imdb: {
+        rating: number
     },
     languages?: string[]
 };
