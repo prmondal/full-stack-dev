@@ -20,7 +20,7 @@ moviesRouter.get('/', async (req,res,next) => {
     let jsonResponse = {};
     jsonResponse.totalCount = await db.collection('movies').count();
     jsonResponse.page = page;
-    jsonResponse.resultCount = Math.min(limit, moviesList.length);
+    jsonResponse.noOfResults = Math.min(limit, moviesList.length);
     jsonResponse.data = moviesList;
 
     res.json(jsonResponse);

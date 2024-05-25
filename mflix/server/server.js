@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 app.use((req,res,next) => {
-    console.log(`[INFO] Route url: ${req.url}. Method: ${req.method}`);
+    console.log(`[INFO] Request Url: ${req.url}. Method: ${req.method}`);
     next();
 });
 

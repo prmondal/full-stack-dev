@@ -8,7 +8,7 @@
 
 .movies-container {
   width: 70vw;
-  background-color: blanchedalmond;
+  background-color: #232222;
 }
 
 .movie-card {
@@ -39,7 +39,7 @@
     right: 15px;
     cursor: pointer;
     user-select: none;
-    color: rgb(65, 160, 36);
+    color: #ce236c;
   }
 }
 
@@ -47,7 +47,7 @@
 	position: sticky;
 	display: grid;
 	place-items: center;
-  background-color: beige;
+  background-color: #f3fffd;
   width: 30vw;
   height: 100vh;
   top: 0;
