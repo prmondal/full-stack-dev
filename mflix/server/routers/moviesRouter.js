@@ -1,5 +1,6 @@
 import express from 'express';
 import db from '../db/index.js';
+import { ObjectId } from 'mongodb';
 
 const moviesRouter = express.Router();
 const DEFAULT_PAGE_LIMIT = 20;
@@ -24,6 +25,17 @@ moviesRouter.get('/', async (req,res,next) => {
     jsonResponse.data = moviesList;
 
     res.json(jsonResponse);
+});
+
+moviesRouter.put('/:id', async (req,res,next) => {
+    const result = await db.collection('movies').updateOne({ _id: ObjectId.createFromHexString(req.params.id) }, { $set: { wishlisted: req.body.wishlisted}});
+    if (result.modifiedCount) {
+        console.log(`Successfully updated movie with _id: ${req.params.id}`);
+        res.sendStatus(200);
+    } else {
+        console.log("Failed to update.");
+        res.sendStatus(500);
+    }
 });
 
 export default moviesRouter;
