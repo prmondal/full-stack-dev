@@ -2,6 +2,10 @@
   margin: 0 auto;
 }
 
+body {
+  margin: 0 auto;
+}
+
 .app {
   display: flex;
 }
@@ -22,6 +26,8 @@
 
   &:hover {
 	  filter: drop-shadow(0 0 1em #000000aa);
+    transform: scale(1.2);
+    transition: transform 150ms ease-in-out;
   }
 
   .thumbnail {
@@ -40,6 +46,7 @@
     cursor: pointer;
     user-select: none;
     color: #ce236c;
+    z-index:1;
   }
 }
 
