@@ -3,10 +3,29 @@ import { MovieSelectHandlerContext } from "../../contexts/MovieSelectHandlerCont
 import { useCallback, useContext, useState } from "react";
 import WishListButton from "./WishListButton";
 
+//todo: move to common place
+const MOVIE_API_ENDPOINT_URL = 'http://localhost:3000/movies';
+
+const sendWishMovieRequest = async (id: string): Promise<boolean> => {
+    const response = await fetch(`${MOVIE_API_ENDPOINT_URL}/${id}/wish`, {
+        method: "PUT"
+    });
+    
+    return response.ok;
+};
+
+const sendUnWishMovieRequest = async (id: string): Promise<boolean> => {
+    const response = await fetch(`${MOVIE_API_ENDPOINT_URL}/${id}/unwish`, {
+        method: "PUT"
+    });
+    
+    return response.ok;
+};
+
 const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
     const { movieSelectHandler } = useContext(MovieSelectHandlerContext);
 
-    const [wishListed, setWishListed] = useState(false);
+    const [wishListed, setWishListed] = useState(movieInfo.wishlisted);
     const [showWishListIcon, setShowWishListIcon] = useState(false);
 
     const clickHandler = useCallback(() => {
@@ -17,19 +36,25 @@ const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
         setShowWishListIcon(!showWishListIcon); 
     }, [showWishListIcon]);
 
-    const wishListIconClickHandler = useCallback((e: React.MouseEvent) => {
+    const wishListIconClickHandler = useCallback(async (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        setWishListed(!wishListed);
-    }, [wishListed]);
+        
+        let requestSuccessful: boolean;
+        if (!wishListed) {
+            requestSuccessful = await sendWishMovieRequest(movieInfo.id);
+        } else {
+            requestSuccessful = await sendUnWishMovieRequest(movieInfo.id);
+        }
+
+        if (requestSuccessful)
+            setWishListed(!wishListed);
+    }, [movieInfo, wishListed]);
 
     return (
         <div className='movie-card'>
             <div className='thumbnail' onClick={clickHandler} onMouseEnter={thumbnailMouseEnterHandler} onMouseLeave={thumbnailMouseEnterHandler}>
-                {
-                    showWishListIcon && <WishListButton clickHandler={wishListIconClickHandler} wishListed={wishListed}/>
-                }
-
+                { showWishListIcon && <WishListButton clickHandler={wishListIconClickHandler} wishListed={wishListed}/> }
                 <img decoding="async" src={movieInfo.thumbnail} />
             </div>
         </div>

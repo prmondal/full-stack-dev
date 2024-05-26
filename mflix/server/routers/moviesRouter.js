@@ -27,10 +27,21 @@ moviesRouter.get('/', async (req,res,next) => {
     res.json(jsonResponse);
 });
 
-moviesRouter.put('/:id', async (req,res,next) => {
-    const result = await db.collection('movies').updateOne({ _id: ObjectId.createFromHexString(req.params.id) }, { $set: { wishlisted: req.body.wishlisted}});
+moviesRouter.put('/:id/wish', async (req,res,next) => {
+    const result = await db.collection('movies').updateOne({ _id: ObjectId.createFromHexString(req.params.id) }, { $set: { wishlisted: true}});
     if (result.modifiedCount) {
-        console.log(`Successfully updated movie with _id: ${req.params.id}`);
+        console.log(`Successfully wished movie with _id: ${req.params.id}`);
+        res.sendStatus(200);
+    } else {
+        console.log("Failed to update.");
+        res.sendStatus(500);
+    }
+});
+
+moviesRouter.put('/:id/unwish', async (req,res,next) => {
+    const result = await db.collection('movies').updateOne({ _id: ObjectId.createFromHexString(req.params.id) }, { $set: { wishlisted: false}});
+    if (result.modifiedCount) {
+        console.log(`Successfully unwished movie with _id: ${req.params.id}`);
         res.sendStatus(200);
     } else {
         console.log("Failed to update.");

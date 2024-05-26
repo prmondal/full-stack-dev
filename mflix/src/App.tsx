@@ -14,7 +14,8 @@ const movieResponseTypeToMovieInfoTypeHandler = (movie: MovieInfoResponseType) =
 	year: movie.year,
 	runtime: movie.runtime,
 	imdb: movie.imdb,
-	languages: movie.languages
+	languages: movie.languages,
+	wishlisted: movie.wishlisted
 });
 
 function App() {

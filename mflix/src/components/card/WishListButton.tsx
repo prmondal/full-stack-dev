@@ -4,7 +4,7 @@ import { faHeart as fasHeart } from '@fortawesome/free-solid-svg-icons'; // hack
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 
 interface WishListButtonProps { 
-    wishListed: boolean;
+    wishListed?: boolean;
     clickHandler: (event: React.MouseEvent) => void
 };
 

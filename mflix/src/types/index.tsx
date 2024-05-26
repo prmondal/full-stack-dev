@@ -8,7 +8,8 @@ export interface MovieInfoType {
     imdb: {
         rating: number
     },
-    languages?: string[]
+    languages?: string[],
+    wishlisted?: boolean
 };
 
 export interface MovieInfoResponseType {
@@ -21,7 +22,8 @@ export interface MovieInfoResponseType {
     imdb: {
         rating: number
     },
-    languages?: string[]
+    languages?: string[],
+    wishlisted?: boolean
 };
 
 export type MovieListType = MovieInfoType[];

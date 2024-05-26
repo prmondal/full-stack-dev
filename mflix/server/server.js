@@ -16,6 +16,7 @@ app.get('/', (req, res, next) => {
 });
 
 app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use(cors());
 app.use('/movies', moviesRouter);
 
