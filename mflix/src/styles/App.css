@@ -51,13 +51,14 @@ body {
 }
 
 .movie-preview {
-	position: sticky;
+	position: fixed;
 	display: grid;
 	place-items: center;
   background-color: #f3fffd;
   width: 30vw;
   height: 100vh;
   top: 0;
+  right: 0;
 }
 
 .movie-preview-container {

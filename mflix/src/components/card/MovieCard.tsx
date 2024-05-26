@@ -27,6 +27,7 @@ const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
 
     const [wishListed, setWishListed] = useState(movieInfo.wishlisted);
     const [showWishListIcon, setShowWishListIcon] = useState(false);
+    const [hasBrokenThumbnail, setHasBrokenThumbnail] = useState<boolean>(false);
 
     const clickHandler = useCallback(() => {
         movieSelectHandler(movieInfo);
@@ -51,11 +52,16 @@ const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
             setWishListed(!wishListed);
     }, [movieInfo, wishListed]);
 
+    const thumbnailErrorHandler = (e) => {
+        setHasBrokenThumbnail(true);
+    }
+
     return (
+        !hasBrokenThumbnail &&
         <div className='movie-card'>
             <div className='thumbnail' onClick={clickHandler} onMouseEnter={thumbnailMouseEnterHandler} onMouseLeave={thumbnailMouseEnterHandler}>
                 { showWishListIcon && <WishListButton clickHandler={wishListIconClickHandler} wishListed={wishListed}/> }
-                <img decoding="async" src={movieInfo.thumbnail} />
+                <img decoding="async" src={movieInfo.thumbnail} onError={thumbnailErrorHandler}/>
             </div>
         </div>
     )
