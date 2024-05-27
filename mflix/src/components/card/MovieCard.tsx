@@ -61,7 +61,7 @@ const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
         <div className='movie-card'>
             <div className='thumbnail' onClick={clickHandler} onMouseEnter={thumbnailMouseEnterHandler} onMouseLeave={thumbnailMouseEnterHandler}>
                 { showWishListIcon && <WishListButton clickHandler={wishListIconClickHandler} wishListed={wishListed}/> }
-                <img decoding="async" src={movieInfo.thumbnail} onError={thumbnailErrorHandler}/>
+                <img decoding="async" loading="lazy" src={movieInfo.thumbnail} onError={thumbnailErrorHandler}/>
             </div>
         </div>
     )

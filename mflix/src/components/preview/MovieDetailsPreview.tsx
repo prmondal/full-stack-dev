@@ -6,7 +6,7 @@ const MovieDetailsPreview = ({ movie} : { movie: MovieInfoType }) => {
             <div className='movie-preview-container'>
                 <div className='title'>{movie.title}</div>
                 <div className='thumbnail'>
-                    <img decoding="async" src={movie.thumbnail} />
+                    <img decoding="async" loading="lazy" src={movie.thumbnail} />
                 </div>
                 <div className='metadata'>
                     <div>{`Released: ${movie.year.toString()}`}</div>
