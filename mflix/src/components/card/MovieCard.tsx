@@ -28,14 +28,15 @@ const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
     const [wishListed, setWishListed] = useState(movieInfo.wishlisted);
     const [showWishListIcon, setShowWishListIcon] = useState(false);
     const [hasBrokenThumbnail, setHasBrokenThumbnail] = useState<boolean>(false);
+    const [thumbnailLoaded, setThumbnailLoaded] = useState<boolean>(false);
 
     const clickHandler = useCallback(() => {
         movieSelectHandler(movieInfo);
     }, [movieSelectHandler, movieInfo]);
 
     const thumbnailMouseEnterHandler = useCallback(() => {
-        setShowWishListIcon(!showWishListIcon); 
-    }, [showWishListIcon]);
+        thumbnailLoaded && setShowWishListIcon(!showWishListIcon); 
+    }, [thumbnailLoaded, showWishListIcon]);
 
     const wishListIconClickHandler = useCallback(async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -56,12 +57,16 @@ const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
         setHasBrokenThumbnail(true);
     }
 
+    const thumbnailLoadHandler = (e) => {
+        setThumbnailLoaded(true);
+    }
+
     return (
         !hasBrokenThumbnail &&
         <div className='movie-card'>
             <div className='thumbnail' onClick={clickHandler} onMouseEnter={thumbnailMouseEnterHandler} onMouseLeave={thumbnailMouseEnterHandler}>
                 { showWishListIcon && <WishListButton clickHandler={wishListIconClickHandler} wishListed={wishListed}/> }
-                <img decoding="async" loading="lazy" src={movieInfo.thumbnail} onError={thumbnailErrorHandler}/>
+                <img decoding="async" loading="lazy" src={movieInfo.thumbnail} onLoad={thumbnailLoadHandler} onError={thumbnailErrorHandler}/>
             </div>
         </div>
     )
