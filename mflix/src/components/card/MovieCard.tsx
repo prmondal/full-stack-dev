@@ -6,20 +6,16 @@ import WishListButton from "./WishListButton";
 //todo: move to common place
 const MOVIE_API_ENDPOINT_URL = 'http://localhost:3000/movies';
 
-const sendWishMovieRequest = async (id: string): Promise<boolean> => {
-    const response = await fetch(`${MOVIE_API_ENDPOINT_URL}/${id}/wish`, {
+const wishMovie = async (id: string): Promise<Response> => {
+    return await fetch(`${MOVIE_API_ENDPOINT_URL}/${id}/wish`, {
         method: "PUT"
     });
-    
-    return response.ok;
 };
 
-const sendUnWishMovieRequest = async (id: string): Promise<boolean> => {
-    const response = await fetch(`${MOVIE_API_ENDPOINT_URL}/${id}/unwish`, {
+const unwishMovie = async (id: string): Promise<Response> => {
+    return await fetch(`${MOVIE_API_ENDPOINT_URL}/${id}/unwish`, {
         method: "PUT"
     });
-    
-    return response.ok;
 };
 
 const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
@@ -42,15 +38,18 @@ const MovieCard = ({ movieInfo }: { movieInfo: MovieInfoType }) => {
         e.preventDefault();
         e.stopPropagation();
         
-        let requestSuccessful: boolean;
+        let response: Response;
         if (!wishListed) {
-            requestSuccessful = await sendWishMovieRequest(movieInfo.id);
+            response = await wishMovie(movieInfo.id);
+            if (response.ok) {
+                setWishListed(true);
+            }
         } else {
-            requestSuccessful = await sendUnWishMovieRequest(movieInfo.id);
+            response = await unwishMovie(movieInfo.id);
+            if (response.ok) {
+                setWishListed(false);
+            }
         }
-
-        if (requestSuccessful)
-            setWishListed(!wishListed);
     }, [movieInfo, wishListed]);
 
     const thumbnailErrorHandler = (e) => {
